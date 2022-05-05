@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->group(function() {
-    Route::get('/', [UserController::class, 'index']);
-    Route::get('/login', [UserController::class, 'login']);
-    Route::get('/register', [UserController::class, 'register']);
+    Route::any('/', [UserController::class, 'index'])->middleware('auth:sanctum');
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
 });
