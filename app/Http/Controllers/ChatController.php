@@ -17,12 +17,17 @@ class ChatController extends Controller
     }
 
     public function send(Request $request) {
-        $message = ChatMessage::create([
-            'user_id' => Auth::id(),
-            'content' => $request['message']
-        ]);
+        if(Auth::user()) {
 
-        event(new MessageSent($message));
+            $message = ChatMessage::create([
+                'user_id' => Auth::id(),
+                'content' => $request['message']
+            ]);
+
+            event(new MessageSent($message));
+
+            return redirect()->back();
+        }
 
         return redirect()->back();
     }
