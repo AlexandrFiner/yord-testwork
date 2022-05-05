@@ -23,7 +23,7 @@
         @foreach($messages as $message)
             <li>
                 <b>{{$message->author->email}}</b>
-                <span>{{$message->content}}</span>
+                <p>{{$message->content}}</p>
             </li>
         @endforeach
     </ul>
@@ -47,10 +47,10 @@
         });
 
         function appendMessage(data) {
-            $('#chat').append(
+            $('#chat').prepend(
                 $('<li/>').append(
-                    $('<b/>').text(data.email),
-                    $('<span/>').text(data.content)
+                    $('<b/>').text(data.message.author.email),
+                    $('<p/>').text(data.message.content)
                 )
             );
         }
@@ -58,7 +58,7 @@
         var socket = io('localhost:5000');
 
         socket.on('chat:message.sent', function (data) {
-            console.log(data);
+            appendMessage(data);
         });
     </script>
 @endsection

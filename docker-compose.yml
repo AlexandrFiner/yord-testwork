@@ -98,8 +98,15 @@ services:
           - ./:/var/www
         ports:
           - "5000:5000"
+        depends_on:
+            - redis
+        links:
+            - redis
         working_dir: /var/www
         command: "npm start"
+        networks:
+            - backend
+
 networks:
     backend:
 

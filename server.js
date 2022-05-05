@@ -5,24 +5,21 @@ const io = require('socket.io')(http, {
     cors: "*"
 });
 
-const subscriber = require('redis').createClient({
-    host: 'redis',
-    port: 6379,
-    password: 'yord'
+const redis = require('redis');
+const subscriber = redis.createClient({
+    url: 'redis://redis:6379',
+    password: 'yord',
 });
 
-subscriber.pSubscribe('*', function (error, count) {
-
-});
-
-subscriber.on('pmessage', function(pattern, channel, message) {
-    console.log(channel, message)
-    io.emit('chat', message);
-});
+subscriber.connect();
 
 io.on('connection', function(socket){
-    console.log('connection')
-    subscriber.subscribe('chat');
+    console.log('connection');
+    subscriber.subscribe('chat', (message) => {
+        console.log(message);
+        message = JSON.parse(message);
+        socket.emit('chat:'+message.event, message.data)
+    });
 });
 
 const port = process.env.PORT || 5000;
@@ -30,6 +27,6 @@ const port = process.env.PORT || 5000;
 http.listen(
     port,
     function() {
-        console.log('Listen at ' + port);
+        console.log('Listen at port ' + port);
     }
 );

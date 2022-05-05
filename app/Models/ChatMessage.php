@@ -10,6 +10,7 @@ class ChatMessage extends Model
         'user_id',
         'content'
     ];
+    protected $with = ['author'];
 
     public function author() {
         return $this->belongsTo(User::class, 'user_id', 'id');

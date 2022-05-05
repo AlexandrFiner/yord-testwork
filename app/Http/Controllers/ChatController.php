@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redis;
 class ChatController extends Controller
 {
     public function index() {
-        $messages = ChatMessage::all();
+        $messages = ChatMessage::all()->sortByDesc('id');
         return view('chat.index', ['messages' => $messages]);
     }
 
@@ -25,9 +25,7 @@ class ChatController extends Controller
             ]);
 
             broadcast(new MessageSent($message))->toOthers();
-            // return redirect()->back();
         }
-        // return redirect()->back();
-        return;
+        return 0;
     }
 }
