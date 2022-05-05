@@ -27,4 +27,5 @@ Route::prefix('/chat')->group(function () {
 Route::prefix('user')->group(function () {
     Route::any('/login', [UserController::class, 'login']);
     Route::any('/register', [UserController::class, 'register']);
+    Route::any('/logout', [UserController::class, 'logout']);
 });
