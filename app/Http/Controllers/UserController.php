@@ -40,4 +40,9 @@ class UserController extends Controller
         }
         return view('auth.register');
     }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->back();
+    }
 }
