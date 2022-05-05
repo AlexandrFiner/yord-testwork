@@ -42,7 +42,7 @@
             }).fail(function() {
                 console.log('fail');
             });
-            //отмена действия по умолчанию для кнопки submit
+            $(this)[0].reset();
             e.preventDefault();
         });
 
