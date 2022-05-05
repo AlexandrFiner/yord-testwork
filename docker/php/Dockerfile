@@ -10,6 +10,7 @@ WORKDIR /var/www
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    iputils-ping \
     build-essential \
     libzip-dev \
     libpng-dev \
