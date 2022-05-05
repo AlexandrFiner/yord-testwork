@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('/chat')->group(function () {
+    Route::get('/', [ChatController::class, 'index']);
+    Route::post('/send', [ChatController::class, 'send']);
+});
+
+Route::prefix('user')->group(function () {
+    Route::any('/login', [UserController::class, 'login']);
+    Route::any('/register', [UserController::class, 'register']);
 });
