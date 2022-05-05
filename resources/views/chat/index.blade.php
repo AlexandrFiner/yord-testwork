@@ -58,6 +58,8 @@
         var socket = io('localhost:5000');
 
         socket.on('chat:message.sent', function (data) {
+            let audio = new Audio('/sounds/icq.mp3');
+            audio.play();
             appendMessage(data);
         });
     </script>
