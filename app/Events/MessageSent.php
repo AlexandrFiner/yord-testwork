@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\ChatMessage;
 use App\Models\User;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -23,7 +24,7 @@ class MessageSent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('chat');
+        return new Channel('chat');
     }
 
     public function broadcastAs() {

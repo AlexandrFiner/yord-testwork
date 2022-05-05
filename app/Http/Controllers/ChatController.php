@@ -24,11 +24,10 @@ class ChatController extends Controller
                 'content' => $request['message']
             ]);
 
-            event(new MessageSent($message));
-
-            return redirect()->back();
+            broadcast(new MessageSent($message))->toOthers();
+            // return redirect()->back();
         }
-
-        return redirect()->back();
+        // return redirect()->back();
+        return;
     }
 }
