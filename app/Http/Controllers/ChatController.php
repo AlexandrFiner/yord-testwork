@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Redis;
 class ChatController extends Controller
 {
     public function index() {
+        if(!Auth::user())
+            return redirect('/user/login')->withErrors('Для доступа к чату необходимо авторизоваться!');
+
         $messages = ChatMessage::all()->sortByDesc('id');
         return view('chat.index', ['messages' => $messages]);
     }
