@@ -13,3 +13,10 @@
 
 В проекте приложен дамп для Postman
 
+# Инструкция
+1. ``cp .env.example .env``
+2. ``docker-compose build``
+3. ``docker-compose up -d``
+4. ``docker-compose exec app bash``
+5. ``php artisan key:generate``
+6. ``php artisan migrate``
