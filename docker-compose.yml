@@ -15,7 +15,6 @@ services:
             SERVICE_TAGS: dev
             REDIS_PASSWORD: null
         working_dir: /var/www
-        command: "composer i"
         volumes:
             - ./:/var/www
             - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
